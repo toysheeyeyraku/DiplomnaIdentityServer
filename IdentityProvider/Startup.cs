@@ -75,7 +75,7 @@ namespace IdentityProvider
         {
             app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
-            InitializeDbTestData(app);
+            //InitializeDbTestData(app);
             app.UseCors("CorsPolicy");
             app.UseStaticFiles();
             
