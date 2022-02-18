@@ -18,6 +18,7 @@ using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Stores;
 using Microsoft.AspNetCore.Identity;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
+using IdentityProvider.Models;
 
 namespace IdentityServerHost.Quickstart.UI
 {
@@ -35,7 +36,7 @@ namespace IdentityServerHost.Quickstart.UI
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IIdentityProviderStore _identityProviderStore;
         private readonly IEventService _events;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<ExtendedIdentityUser> _signInManager;
 
         public AccountController(
             IIdentityServerInteractionService interaction,
@@ -43,7 +44,7 @@ namespace IdentityServerHost.Quickstart.UI
             IAuthenticationSchemeProvider schemeProvider,
             IIdentityProviderStore identityProviderStore,
             IEventService events,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<ExtendedIdentityUser> signInManager)
         {
             _interaction = interaction;
             _clientStore = clientStore;

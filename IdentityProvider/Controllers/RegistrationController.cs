@@ -18,8 +18,8 @@ namespace Identity.Controllers
     [Route("[controller]")]
     public class RegistrationController : ControllerBase
     {
-        private UserManager<IdentityUser> userManager;
-        public RegistrationController(UserManager<IdentityUser> userManager)
+        private UserManager<ExtendedIdentityUser> userManager;
+        public RegistrationController(UserManager<ExtendedIdentityUser> userManager)
         {
             this.userManager = userManager;
         }
@@ -39,7 +39,7 @@ namespace Identity.Controllers
         private async Task<bool> IsUserExist(RegisterUserRequest registerUserRequest)
         {
 
-            IdentityUser user = await userManager.FindByNameAsync(registerUserRequest.UserName);
+            ExtendedIdentityUser user = await userManager.FindByNameAsync(registerUserRequest.UserName);
             if (user == null)
             {
                 return false;
@@ -52,15 +52,16 @@ namespace Identity.Controllers
 
         private async Task CreateUser(RegisterUserRequest registerUserRequest)
         {
-            var identityUser = new IdentityUser(registerUserRequest.UserName)
+            var identityUser = new ExtendedIdentityUser()
             {
-                //Id = Guid.NewGuid().ToString()
-        };
+                Id = new ObjectId(DateTime.Now, 1, 1, 1).ToString()
+            };
+            identityUser.UserName = registerUserRequest.UserName;
             var claims = new List<Claim>
                     {
                         new Claim(JwtClaimTypes.Role, registerUserRequest.Role)
                     };
-
+            identityUser.Role = registerUserRequest.Role;
             var result = await userManager.CreateAsync(identityUser, registerUserRequest.Password);
             result = await userManager.AddClaimsAsync(identityUser, claims);
         }

@@ -19,8 +19,8 @@ namespace Identity.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private UserManager<IdentityUser> userManager;
-        public UserController(UserManager<IdentityUser> userManager)
+        private UserManager<ExtendedIdentityUser> userManager;
+        public UserController(UserManager<ExtendedIdentityUser> userManager)
         {
             this.userManager = userManager;
         }
