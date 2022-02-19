@@ -15,7 +15,7 @@ using static Duende.IdentityServer.IdentityServerConstants;
 
 namespace Identity.Controllers
 {
-    [Authorize(Policy = LocalApi.PolicyName, Roles = "admin")]
+    [Authorize(Policy = LocalApi.PolicyName, Roles = "admin,comendant,dean,passportHolder")]
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
